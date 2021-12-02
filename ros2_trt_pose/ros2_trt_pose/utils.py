@@ -46,8 +46,9 @@ def load_params(base_dir, human_pose_json, model_name):
         MODEL_WEIGHTS = 'resnet18_baseline_att_224x224_A_epoch_249.pth'
     if model_name == 'densenet121':
         MODEL_WEIGHTS = 'densenet121_baseline_att_256x256_B_epoch_160.pth'
-
+    
     model_weights = os.path.join(base_dir, MODEL_WEIGHTS)
+    print("base_dir ", base_dir)
 
     with open(hp_json_file,'r') as f:
         human_pose = json.load(f)
@@ -74,12 +75,15 @@ def load_model(base_dir, model_name, num_parts, num_links, model_weights):
         height, width = 256,256
 
     model_file_path = os.path.join(base_dir, OPTIMIZED_MODEL)
+    print("model_file_path ", model_file_path)
     if not os.path.isfile(model_file_path):
+        print("Create Optimized model file")
         data = torch.zeros((1,3, height, width)).cuda()
         model_trt = torch2trt.torch2trt(model, [data], fp16_mode=True, max_workspace_size=1<<25)
         torch.save(model_trt.state_dict(), model_file_path)
     model_trt = TRTModule()
     model_trt.load_state_dict(torch.load(model_file_path))
+    print("Optimized model Done!!!")
 
     return model_trt, height, width
 
