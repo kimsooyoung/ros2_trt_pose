@@ -1,0 +1,19 @@
+
+ros2 run image_tools cam2image --ros-args -p device_id:=1
+ros2 run image_tools showimage
+
+cd /home/rb-nano/ros2_seminar_ws/src/ros2_trt_pose
+mkdir models && cd models
+wget --no-check-certificate 'https://docs.google.com/uc?export=download&id=1XYDdCUdiF2xxx4rznmLb62SdOUZuoNbd' \
+    -O resnet18_baseline_att_224x224_A_epoch_249.pth
+wget --no-check-certificate 'https://docs.google.com/uc?export=download&id=13FkJkx7evQ1WwP54UmdiDXWyFMY1OxDU' \
+    -O densenet121_baseline_att_256x256_B
+
+wget --no-check-certificate 'https://github.com/NVIDIA-AI-IOT/trt_pose/blob/master/tasks/human_pose/human_pose.json'
+
+$ l
+densenet121_baseline_att_256x256_B
+human_pose.json
+resnet18_baseline_att_224x224_A_epoch_249.pth
+
+

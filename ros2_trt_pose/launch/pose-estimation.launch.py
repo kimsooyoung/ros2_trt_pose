@@ -32,7 +32,7 @@ def generate_launch_description():
             node_name="pose_estimation",
             output="screen",
             parameters = [{
-                'base_dir':'/home/ak-nv/trt_pose/tasks/human_pose',
+                'base_dir':'/home/rb-nano/Downloads/trt_pose/tasks/human_pose',
                 'model': 'resnet18',
                 'point_range' : 10,
                 'show_image' : False,
